@@ -30,10 +30,15 @@ protected:
 	void operator=(ModelFrame&&) = delete;
 
 private:	
-	Model* wintermute;
-	Shader* shader;
-	Camera* camera;
+	Model wintermute = Model("models/wintermute.obj");
+
+	Shader shader = Shader("shaders/wintermute.vs",
+				"shaders/wintermute.frag");
+
+	Camera camera = Camera(glm::vec3(13.8f, 4.7f, -3.3f), 
+			    glm::vec2(-7.5f, 175.0f),
+			    0.1f, 0.020f);
 
 	glm::mat4 model;
-	glm::mat4 proj;
+	glm::mat4 proj = glm::perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f); 
 };
