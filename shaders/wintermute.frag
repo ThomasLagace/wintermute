@@ -2,21 +2,27 @@
 
 uniform vec3 viewPos;
 uniform vec3 lightPos;
-uniform sampler2D tex;
+uniform vec3 lightPos2;
+uniform vec3 mcolor;
+
 in vec2 texCoord;
-in vec3 Normal;
+in vec3 normal;
 in vec3 fragPos;
+
 out vec4 color;
 
 void main() {
-    vec3 ambient = vec3(0.1) * vec3(texture(tex, texCoord));
-    vec3 lightDir = normalize(lightPos - fragPos);
-    float diffuseFactor = max(dot(Normal, lightDir), 0.0);
-    float diffuseStrength = 1.0;
-    vec3 diffuse = diffuseStrength * diffuseFactor * vec3(texture(tex, texCoord));
-    //Specular highlights
-    float specularFactor = pow(max(dot(normalize(viewPos - fragPos), reflect(-normalize(lightPos - fragPos), Normal)), 0.0), 16.0);
-    float specularStrength = 1.0;
-    vec3 specular = specularStrength * specularFactor * vec3(texture(tex, texCoord));
-    color = vec4(1.0f);//color = vec4(ambient + diffuse + specular, 1.0);
+    vec3 ambient = vec3(0.3) * mcolor;
+
+    float diffuseFactor = max(dot(normal, normalize(lightPos - fragPos)), 0.0);
+    float diffuseFactor2 = max(dot(normal, normalize(lightPos2 - fragPos)), 0.0);
+    float diffuseStrength = 2.0;
+    vec3 diffuse = (diffuseStrength * diffuseFactor * mcolor) + (diffuseStrength * diffuseFactor2 * mcolor);
+
+    float specularFactor = pow(max(dot(normalize(viewPos - fragPos), reflect(-normalize(lightPos - fragPos), normal)), 0.0), 16.0);
+    float specularFactor2 = pow(max(dot(normalize(viewPos - fragPos), reflect(-normalize(lightPos2 - fragPos), normal)), 0.0), 16.0);
+    float specularStrength = 2.0;
+    vec3 specular = (specularStrength * specularFactor * mcolor) + (specularStrength * specularFactor2 * mcolor);
+    
+    color = vec4(ambient + diffuse + specular, 1.0);
 }

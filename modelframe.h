@@ -1,11 +1,11 @@
 #pragma once
-#pragma once
 #include <k5/k5.h>
+
+#include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 class ModelFrame : public IFrame {
-
 public:
 	virtual void Init(CEngine* e) override;
 	virtual void Cleanup() override;
@@ -30,16 +30,20 @@ protected:
 	void operator=(ModelFrame&&) = delete;
 
 private:
+	float cameraSpeed = 0.05f;
+	glm::vec3 cameraPos = glm::vec3(13.8f, 4.7f, -3.3f);
+	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	CEngine* engine;
+	float pitch = -7.5f;
+	float yaw = 175.0f;
+	double lastX, lastY;
+	double sensitivity = 0.020;
+	
+	Model* wintermute;
+	Shader* shader;
 
-    Model* wintermute;
-    Shader* shader;
-    glm::mat4 view;
-    glm::mat4 proj;
-    glm::mat4 model;
-    glm::vec3 cameraPos;
-    glm::vec3 cameraFront;
-    glm::vec3 cameraUp = glm::vec3(0.0f, 0.1f, 0.0f);
-
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 proj;
 };
