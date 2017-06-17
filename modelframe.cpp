@@ -8,7 +8,12 @@ void ModelFrame::Init(CEngine* e) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 
+	camera = new Camera(glm::vec3(13.8f, 4.7f, -3.3f), 
+			    glm::vec2(-7.5f, 175.0f),
+			    0.1f, 0.020f);
+
 	shader = new Shader("shaders/wintermute.vs", "shaders/wintermute.frag");
+
 	wintermute = new Model("models/wintermute.obj");
 
 	proj = glm::perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
@@ -23,34 +28,18 @@ void ModelFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double 
 		engine->Quit();
 
 	if (keyboard[GLFW_KEY_W])
-		cameraPos += cameraSpeed * cameraFront;
+		camera->MoveForward();
 	if (keyboard[GLFW_KEY_S])
-		cameraPos -= cameraSpeed * cameraFront;
+		camera->MoveBack();
 	if (keyboard[GLFW_KEY_D])
-		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		camera->StrafeRight();
 	if (keyboard[GLFW_KEY_A])
-		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		camera->StrafeLeft();
 
-	yaw += (float)((mxpos - lastX) * sensitivity);
-	pitch += (float)((lastY - mypos) * sensitivity);
-	lastX = mxpos;
-	lastY = mypos;
-
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-
-	glm::vec3 front;
-	front.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
-	front.y = sin(glm::radians(pitch));
-	front.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
-	cameraFront = glm::normalize(front);
+	camera->Update((float)mxpos, (float)mypos);
 }
 
-void ModelFrame::Loop() {
-	view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-}
+void ModelFrame::Loop() {}
 
 void ModelFrame::Render() {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -58,7 +47,7 @@ void ModelFrame::Render() {
 	
 	shader->Use();
 	shader->uMatrix4("model", model);
-	shader->uMatrix4("view", view);
+	shader->uMatrix4("view", camera->GetView());
 	shader->uMatrix4("proj", proj);
 	shader->uVector3("viewPos", cameraPos);
 	shader->uVector3("mcolor", 0.3f, 0.3f, 0.3f);

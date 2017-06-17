@@ -29,21 +29,11 @@ protected:
 	void operator=(const ModelFrame&) = delete;
 	void operator=(ModelFrame&&) = delete;
 
-private:
-	float cameraSpeed = 0.05f;
-	glm::vec3 cameraPos = glm::vec3(13.8f, 4.7f, -3.3f);
-	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	float pitch = -7.5f;
-	float yaw = 175.0f;
-	double lastX, lastY;
-	double sensitivity = 0.020;
-	
+private:	
 	Model* wintermute;
 	Shader* shader;
+	Camera* camera;
 
 	glm::mat4 model;
-	glm::mat4 view;
 	glm::mat4 proj;
 };
