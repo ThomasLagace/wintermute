@@ -3,7 +3,7 @@
 void ModelFrame::Init(CEngine* e) {
 	engine = e;
     wintermute = new Model("models/wintermute.obj");
-    shader = new Shader("./shader/wintermute.vs","./shader/wintermute.frag");
+    shader = new Shader("shaders/wintermute.vs","shaders/wintermute.frag");
     wintermute->Draw(shader);
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, 3.0f));
     proj = glm::perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f); 
