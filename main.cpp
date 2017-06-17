@@ -4,7 +4,7 @@
 int main(int argc, char** argv) {
     CEngine& game = CEngine::Instance();
     game.CreateWindow("wintermute", 1280, 720, false);
-    game.ChangeFrame(ModelFrame::Instance());
+    game.ChangeFrame(&ModelFrame::Instance());
     while (game.Running()) {
         game.Tick();
     }
