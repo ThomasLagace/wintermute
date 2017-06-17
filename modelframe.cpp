@@ -14,20 +14,15 @@ void ModelFrame::Pause() {}
 void ModelFrame::Resume() {}
 
 void ModelFrame::ProcessInput(bool* keyboard, bool* mouse, double mxpos, double mypos) {
-	if (keyboard[GLFW_KEY_ESCAPE])
-		engine->Quit();
+	if (keyboard[GLFW_KEY_ESCAPE]) engine->Quit();
 
-	if (keyboard[GLFW_KEY_W])
-		camera.MoveForward();
+	if (keyboard[GLFW_KEY_W]) camera.MoveForward();
 	
-	if (keyboard[GLFW_KEY_S])
-		camera.MoveBack();
+	if (keyboard[GLFW_KEY_S]) camera.MoveBack();
 	
-	if (keyboard[GLFW_KEY_D])
-		camera.StrafeRight();
+	if (keyboard[GLFW_KEY_D]) camera.StrafeRight();
 	
-	if (keyboard[GLFW_KEY_A])
-		camera.StrafeLeft();
+	if (keyboard[GLFW_KEY_A]) camera.StrafeLeft();
 
 	camera.Update((float)mxpos, (float)mypos);
 }
