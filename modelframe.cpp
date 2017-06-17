@@ -38,16 +38,16 @@ void ModelFrame::Render() {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	shader->Use();
-	shader->uMatrix4("model", model);
-	shader->uMatrix4("view", camera.GetView());
-	shader->uMatrix4("proj", proj);
-	shader->uVector3("viewPos", camera.GetPos());
-	shader->uVector3("mcolor", 0.3f, 0.3f, 0.3f);
-	shader->uVector3("lightPos", 12.1f, 3.3f, -4.4f);
-	shader->uVector3("lightPos2", -11.9f, 1.6f, -2.2f);
+	shader.Use();
+	shader.uMatrix4("model", model);
+	shader.uMatrix4("view", camera.GetView());
+	shader.uMatrix4("proj", proj);
+	shader.uVector3("viewPos", camera.GetPos());
+	shader.uVector3("mcolor", 0.3f, 0.3f, 0.3f);
+	shader.uVector3("lightPos", 12.1f, 3.3f, -4.4f);
+	shader.uVector3("lightPos2", -11.9f, 1.6f, -2.2f);
 
-	wintermute->Draw(shader);
+	wintermute.Draw(&shader);
 
 	glfwSwapBuffers(engine->wnd);
 }

@@ -36,7 +36,7 @@ private:
 				"shaders/wintermute.frag");
 
 	Camera camera = Camera(glm::vec3(13.8f, 4.7f, -3.3f), 
-			    glm::vec2(-7.5f, 175.0f),
+			    glm::vec2(175.0f, -7.5f),
 			    0.1f, 0.020f);
 
 	glm::mat4 model;
