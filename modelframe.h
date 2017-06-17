@@ -1,6 +1,8 @@
 #pragma once
 #pragma once
 #include <k5/k5.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 class ModelFrame : public IFrame {
 
@@ -30,4 +32,14 @@ protected:
 private:
 
 	CEngine* engine;
+
+    Model* wintermute;
+    Shader* shader;
+    glm::mat4 view;
+    glm::mat4 proj;
+    glm::mat4 model;
+    glm::vec3 cameraPos;
+    glm::vec3 cameraFront;
+    glm::vec3 cameraUp = glm::vec3(0.0f, 0.1f, 0.0f);
+
 };
