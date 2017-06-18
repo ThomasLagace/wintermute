@@ -40,5 +40,10 @@ private:
 			    0.1f, 0.020f);
 
 	glm::mat4 model;
-	glm::mat4 proj = glm::perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f); 
+	glm::mat4 proj = glm::perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
+	
+	GLuint texID;
+	GLuint vao;
+	GLuint vbo;
+	Shader skybox = Shader("shaders/cubemap.vs", "shaders/cubemap.frag");
 };
