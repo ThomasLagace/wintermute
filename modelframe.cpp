@@ -19,12 +19,12 @@ void ModelFrame::Init(CEngine* e) {
 	int channels;
 	unsigned char* data;
 	constexpr const char* fileNames[6] = {
-		"mp_majestic/majestic_rt.tga",
-		"mp_majestic/majestic_lf.tga",
-		"mp_majestic/majestic_up.tga",
-		"mp_majestic/majestic_dn.tga",
-		"mp_majestic/majestic_ft.tga",
-		"mp_majestic/majestic_bk.tga",
+		"env/cwd_rt.JPG",
+		"env/cwd_lf.JPG",
+		"env/cwd_up.JPG",
+		"env/cwd_dn.JPG",
+		"env/cwd_bk.JPG",
+		"env/cwd_ft.JPG",
 	};
 
 	for (GLuint i = 0; i < 6; i++) {
@@ -127,7 +127,7 @@ void ModelFrame::Render() {
 
 	glDepthMask(GL_FALSE);
 	skybox.Use();
-	skybox.uMatrix4("view", glm::mat4(glm::mat4(camera.GetView())));
+	skybox.uMatrix4("view", glm::mat4(glm::mat3(camera.GetView())));
 	skybox.uMatrix4("proj", proj);
 	glBindVertexArray(vao);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
