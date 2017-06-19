@@ -4,6 +4,7 @@ uniform vec3 viewPos;
 uniform vec3 lightPos;
 uniform vec3 lightPos2;
 uniform vec3 mcolor;
+uniform vec3 lcolor;
 
 in vec2 texCoord;
 in vec3 normal;
@@ -17,7 +18,7 @@ void main() {
     float diffuseFactor = max(dot(normal, normalize(lightPos - fragPos)), 0.0);
     float diffuseFactor2 = max(dot(normal, normalize(lightPos2 - fragPos)), 0.0);
     float diffuseStrength = 2.0;
-    vec3 diffuse = (diffuseStrength * diffuseFactor * mcolor * vec3(0.5, 0.5, 0.9)) + (diffuseStrength * diffuseFactor2 * mcolor * vec3(0.5, 0.5, 0.9)); 
+    vec3 diffuse = (diffuseStrength * diffuseFactor * mcolor * vec3(0.9, 0.5, 0.5)) + (diffuseStrength * diffuseFactor2 * mcolor * vec3(0.9, 0.5, 0.5)); 
 
     float specularFactor = pow(max(dot(normalize(viewPos - fragPos), reflect(-normalize(lightPos - fragPos), normal)), 0.0), 16.0);
     float specularFactor2 = pow(max(dot(normalize(viewPos - fragPos), reflect(-normalize(lightPos2 - fragPos), normal)), 0.0), 16.0);

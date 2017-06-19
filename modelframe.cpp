@@ -7,6 +7,7 @@ void ModelFrame::Init(CEngine* e) {
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE); 
+    camera.SetSens(0.04);
 
 	//
 	// Here be dragons
@@ -19,12 +20,12 @@ void ModelFrame::Init(CEngine* e) {
 	int channels;
 	unsigned char* data;
 	constexpr const char* fileNames[6] = {
-		"env/cwd_rt.JPG",
-		"env/cwd_lf.JPG",
-		"env/cwd_up.JPG",
-		"env/cwd_dn.JPG",
-		"env/cwd_bk.JPG",
-		"env/cwd_ft.JPG",
+		"env/math/rt.tga",
+		"env/math/lf.tga",
+		"env/math/up.tga",
+		"env/math/dn.tga",
+		"env/math/bk.tga",
+		"env/math/ft.tga",
 	};
 
 	for (GLuint i = 0; i < 6; i++) {
