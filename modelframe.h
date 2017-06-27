@@ -39,11 +39,19 @@ private:
 			    glm::vec2(175.0f, -7.5f),
 			    0.1f, 0.020f);
 
+	const char* skyboxTex[6] = {
+				"env/math/rt.tga",
+				"env/math/lf.tga",
+				"env/math/up.tga",
+				"env/math/dn.tga",
+				"env/math/bk.tga",
+				"env/math/ft.tga"
+	};
+
+	Cubemap skybox = Cubemap(skyboxTex);
+
 	glm::mat4 model;
 	glm::mat4 proj = glm::perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 	
-	GLuint texID;
-	GLuint vao;
-	GLuint vbo;
-	Shader skybox = Shader("shaders/cubemap.vs", "shaders/cubemap.frag");
+	Shader skyboxShader = Shader("shaders/cubemap.vs", "shaders/cubemap.frag");
 };
